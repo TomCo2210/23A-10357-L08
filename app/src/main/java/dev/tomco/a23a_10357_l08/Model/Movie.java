@@ -9,7 +9,7 @@ public class Movie {
     private int year = 0;
     private long reviews = 0;
     private boolean isFavorite = false;
-    private double rating = 0.0;
+    private float rating = 0.0f;
 
     public Movie() {
     }
@@ -68,11 +68,11 @@ public class Movie {
         return this;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public Movie setRating(double rating) {
+    public Movie setRating(float rating) {
         this.rating = rating;
         return this;
     }

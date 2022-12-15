@@ -16,6 +16,7 @@ public class DataManager {
                 .setDuration(116)
                 .setRating(36)
                 .setReviews(174)
+                .setFavorite(true)
         );
 
         movies.add(new Movie()
