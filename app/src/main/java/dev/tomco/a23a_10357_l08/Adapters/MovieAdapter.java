@@ -11,12 +11,11 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 
-import dev.tomco.a23a_10357_l08.Interfaces.FavoriteCallback;
+import dev.tomco.a23a_10357_l08.Interfaces.MovieCallback;
 import dev.tomco.a23a_10357_l08.Model.Movie;
 import dev.tomco.a23a_10357_l08.R;
 import dev.tomco.a23a_10357_l08.Utils.ImageLoader;
@@ -26,15 +25,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     private Context context;
     private ArrayList<Movie> movies;
-    private FavoriteCallback favoriteCallback;
+    private MovieCallback movieCallback;
 
     public MovieAdapter(Context context, ArrayList<Movie> movies) {
         this.context = context;
         this.movies = movies;
     }
 
-    public MovieAdapter setFavoriteCallback(FavoriteCallback favoriteCallback) {
-        this.favoriteCallback = favoriteCallback;
+    public MovieAdapter setMovieCallback(MovieCallback favoriteCallback) {
+        this.movieCallback = favoriteCallback;
         return this;
     }
 
@@ -42,6 +41,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item_small, parent, false);
         MovieViewHolder movieViewHolder = new MovieViewHolder(view);
         return movieViewHolder;
     }
@@ -91,9 +91,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             movie_LBL_title = itemView.findViewById(R.id.movie_LBL_title);
             movie_IMG_favorite = itemView.findViewById(R.id.movie_IMG_favorite);
             movie_IMG_poster = itemView.findViewById(R.id.movie_IMG_poster);
-
+            itemView.setOnClickListener(v -> movieCallback.itemClicked(getItem(getAdapterPosition()), getAdapterPosition()));
             movie_IMG_favorite.setOnClickListener(v -> {
-                favoriteCallback.favoriteClicked(getItem(getAdapterPosition()), getAdapterPosition());
+                movieCallback.favoriteClicked(getItem(getAdapterPosition()), getAdapterPosition());
             });
         }
     }
